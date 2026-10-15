@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {asteroidTemplates,buildAsteroid,surfaceAt} from '../src/asteroids.js';
+import {ISLAND_SPACING,TOTAL_ISLANDS} from '../src/jumping.js';
+async function loadGeometry(){const j=JSON.parse(fs.readFileSync('public/models/andromeda/scene.gltf'));for(const b of j.buffers)b.uri='data:application/octet-stream;base64,'+fs.readFileSync('public/models/andromeda/'+b.uri).toString('base64');for(const m of j.materials){delete m.normalTexture;delete m.occlusionTexture;delete m.pbrMetallicRoughness.baseColorTexture}j.images=[];j.textures=[];globalThis.ProgressEvent??=class{};return new GLTFLoader().parseAsync(JSON.stringify(j),'');}
+test('three real Andromeda geometries, complete texture references and compatible PBR',async()=>{const j=JSON.parse(fs.readFileSync('public/models/andromeda/scene.gltf'));for(const image of j.images)assert.ok(fs.existsSync('public/models/andromeda/'+image.uri));assert.ok(j.materials.every(m=>m.pbrMetallicRoughness.baseColorTexture));assert.equal(asteroidTemplates((await loadGeometry()).scene).length,3)});
+test('all asteroid contacts are on original geometry and jumps clear both surfaces',async()=>{const templates=asteroidTemplates((await loadGeometry()).scene);let maxSurface=-Infinity;for(let i=0;i<=TOTAL_ISLANDS;i++){const rock=buildAsteroid(templates[i%3],i);assert.ok(Math.abs(surfaceAt(rock,0,0))<.00001);assert.equal(rock.scale.x,rock.scale.y);assert.equal(rock.scale.y,rock.scale.z);for(let step=1;step<100;step++){const p=step/100,arc=4*3.6*p*(1-p);for(const z of [-p*ISLAND_SPACING,(1-p)*ISLAND_SPACING]){const y=surfaceAt(rock,0,z);if(y!==null){maxSurface=Math.max(maxSurface,y);assert.ok(arc+.08>=y,`island ${i}, p ${p}, arc ${arc}, surface ${y}`)}}}}});

@@ -1,0 +1,19 @@
+﻿import * as T from 'three';
+const mat=(color,metalness=0)=>new T.MeshStandardMaterial({color,roughness:.5,metalness});
+export function createFallbackHero(){
+ const root=new T.Group(),rig=new T.Group();root.add(rig);const skin=mat('#ffc193'),orange=mat('#ff741e',.22),dark=mat('#182136',.35),hair=mat('#56301a'),gold=mat('#ffce55',.6),white=mat('#fff8ef'),blue=mat('#1fa5f0',.25),black=mat('#111526');
+ function mesh(g,m,parent,x,y,z,sx=1,sy=1,sz=1){let o=new T.Mesh(g,m);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=true;parent.add(o);return o}
+ const sphere=new T.SphereGeometry(1,24,18),cap=new T.CapsuleGeometry(.17,.45,5,12);
+ mesh(sphere,orange,rig,0,1.05,0,.4,.48,.27);mesh(sphere,dark,rig,0,.78,0,.36,.16,.28);mesh(new T.TorusGeometry(.27,.065,8,24),dark,rig,0,1.42,0).rotation.x=Math.PI/2;
+ const head=new T.Group();head.position.y=1.93;rig.add(head);mesh(sphere,skin,head,0,0,0,.55,.56,.48);mesh(sphere,skin,head,-.53,-.02,0,.12,.18,.11);mesh(sphere,skin,head,.53,-.02,0,.12,.18,.11);
+ // Face points toward -Z, in the running direction.
+ for(const x of [-.21,.21]){mesh(sphere,white,head,x,.035,-.409,.17,.2,.085);mesh(sphere,blue,head,x,.025,-.485,.105,.13,.035);mesh(sphere,black,head,x,.025,-.511,.053,.075,.016);mesh(sphere,white,head,x-.025,.075,-.53,.025,.032,.012);const brow=mesh(new T.CapsuleGeometry(.035,.16,3,8),hair,head,x,.27,-.4);brow.rotation.z=x<0?1.7:1.45;}
+ mesh(sphere,skin,head,0,-.09,-.48,.09,.09,.09);const smile=new T.Mesh(new T.TorusGeometry(.14,.022,6,20,Math.PI),dark);smile.position.set(0,-.18,-.447);smile.rotation.z=Math.PI;head.add(smile);
+ mesh(sphere,hair,head,0,.31,.05,.54,.36,.46);
+ for(let i=0;i<19;i++){const a=i*2.399;const tuft=mesh(new T.ConeGeometry(.14,.38+(i%3)*.04,7),hair,head,Math.cos(a)*(.18+(i%3)*.11),.46+(i%4)*.035,Math.sin(a)*.31);tuft.rotation.set(Math.sin(a)*.65,0,-Math.cos(a)*.7)}
+ const joints={};for(const side of [-1,1]){const arm=new T.Group();arm.name=side<0?'armL':'armR';arm.position.set(side*.43,1.25,0);rig.add(arm);joints[arm.name]=arm;mesh(cap,orange,arm,0,-.19,0);mesh(sphere,dark,arm,0,-.44,0,.18,.11,.18);mesh(sphere,skin,arm,0,-.54,-.02,.17,.18,.17);const leg=new T.Group();leg.name=side<0?'legL':'legR';leg.position.set(side*.21,.77,0);rig.add(leg);joints[leg.name]=leg;mesh(cap,orange,leg,0,-.2,0);mesh(sphere,dark,leg,0,-.48,-.09,.2,.18,.31);mesh(sphere,gold,leg,0,-.52,-.26,.13,.05,.08)}
+ const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d');ctx.fillStyle='#ffc341';ctx.beginPath();ctx.arc(64,64,56,0,7);ctx.fill();ctx.fillStyle='#172137';ctx.font='italic 900 88px Arial';ctx.textAlign='center';ctx.fillText('Z',60,96);const emblemMat=new T.MeshStandardMaterial({map:new T.CanvasTexture(c),transparent:true,roughness:.4});for(const z of [-.277,.277]){let badge=mesh(new T.PlaneGeometry(.42,.42),emblemMat,rig,0,1.13,z);if(z<0)badge.rotation.y=Math.PI}
+ const mixer=new T.AnimationMixer(rig);const actions={};function clip(name,amp,duration,flight=false){const tracks=[];for(const [key]of Object.entries(joints)){const sign=(key.endsWith('L')?1:-1)*(key.startsWith('arm')?-1:1);tracks.push(new T.NumberKeyframeTrack(key+'.rotation[x]',[0,duration*.25,duration*.5,duration*.75,duration],[0,amp*sign,0,-amp*sign,0]));if(flight&&key.startsWith('arm'))tracks.push(new T.NumberKeyframeTrack(key+'.rotation[z]',[0,duration],[sign*1.2,sign*1.2]))}actions[name]=mixer.clipAction(new T.AnimationClip(name,duration,tracks))}
+ clip('idle',.025,2.8);clip('run',.85,.65);clip('fast',1.05,.42);clip('slow',.45,.85);clip('jump',.4,.8);clip('flight',.12,1.8,true);clip('victory',1.7,.7,true);clip('stumble',1.2,.3);let active;return{root,rig,mixer,animate(name){if(name===active)return;actions[active]?.fadeOut(.18);actions[name].reset().fadeIn(.18).play();active=name},update(dt,speed){mixer.update(dt);rig.position.y=speed?Math.abs(Math.sin(performance.now()/1000*speed*.7))*.065:0}};
+}
+

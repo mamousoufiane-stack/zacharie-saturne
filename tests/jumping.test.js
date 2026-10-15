@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {IslandJumper,ISLAND_SPACING,TOTAL_ISLANDS,JUMP_DURATION} from '../src/jumping.js';
+test('no automatic running, no lateral movement while waiting',()=>{const s=new IslandJumper();for(let i=0;i<600;i++)s.update(1/60);assert.equal(s.distance,0);assert.equal(s.x,0);assert.equal(s.speed,0)});
+test('one tap produces one complete ballistic hop to next asteroid',()=>{const s=new IslandJumper();assert.ok(s.jump());assert.equal(s.jump(),false);s.update(JUMP_DURATION/2);assert.equal(s.y,3.6);assert.equal(s.distance,ISLAND_SPACING/2);s.update(JUMP_DURATION/2);assert.equal(s.distance,ISLAND_SPACING);assert.equal(s.y,0);assert.equal(s.island,1);assert.equal(s.crystals,1);s.update(10);assert.equal(s.distance,ISLAND_SPACING)});
+test('late tap buffers exactly one following jump',()=>{const s=new IslandJumper();s.jump();s.update(JUMP_DURATION-.1);s.jump();s.jump();s.update(.11);assert.equal(s.island,1);assert.equal(s.airborne,true);s.update(JUMP_DURATION);assert.equal(s.island,2);assert.equal(s.airborne,false)});
+test('entire route is reachable by taps and stops at final asteroid',()=>{const s=new IslandJumper();for(let i=0;i<TOTAL_ISLANDS;i++){assert.ok(s.jump());for(let j=0;j<70;j++)s.update(1/60);assert.equal(s.island,i+1);assert.equal(s.y,0);assert.equal(s.x,0)}assert.equal(s.jump(),false);assert.equal(s.distance,TOTAL_ISLANDS*ISLAND_SPACING);assert.equal(s.crystals,TOTAL_ISLANDS)});

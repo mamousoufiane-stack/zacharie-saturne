@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {RunnerState,currentEvent,validateTimeline,speedStatus} from '../src/gameplay.js';
+import {loadGeometry} from './glb-helper.js';
+test('speed zones and bounds',()=>{const s=new RunnerState();for(let i=0;i<1000;i++)s.update(.016,{accel:true},'fragile');assert.equal(s.speed,36);assert.equal(speedStatus(s.speed,[14,20]),'fast');for(let i=0;i<1000;i++)s.update(.016,{brake:true},'fragile');assert.equal(s.speed,8);assert.equal(speedStatus(17,[14,20]),'perfect')});
+test('double jump, landing and soft recovery',()=>{const s=new RunnerState();assert.ok(s.jump());assert.ok(s.jump());assert.equal(s.jump(),false);for(let i=0;i<200;i++)s.update(.016,{},'intro');assert.equal(s.y,0);assert.equal(s.jumps,0);assert.ok(s.rescue());assert.equal(s.rescue(),false);assert.equal(s.falls,1);assert.ok(s.energy>=0)});
+test('timeline seek resolves current state; no uncalibrated events fire',()=>{const events=[{id:'a',start:2},{id:'b',start:5},{id:'unset',start:null}];assert.equal(currentEvent(events,0),null);assert.equal(currentEvent(events,6).id,'b');assert.equal(currentEvent(events,3).id,'a')});
+test('timeline rejects malformed and duplicate data',()=>{assert.throws(()=>validateTimeline({events:[{id:'x',start:-1,type:'intro'}]}));assert.throws(()=>validateTimeline({events:[{id:'x',start:0,type:'intro'},{id:'x',start:2,type:'intro'}]}));const data=JSON.parse(fs.readFileSync('src/data/saturnTimeline.json'));assert.equal(validateTimeline(data).events.length,13);assert.ok(data.events.every(e=>e.start===null))});
+test('all packaged GLB geometries parse with real Three.js GLTFLoader',async()=>{for(const file of fs.readdirSync('public/models').filter(x=>x.endsWith('.glb'))){const gltf=await loadGeometry('public/models/'+file);assert.ok(gltf.scene.children.length>0,file)}});

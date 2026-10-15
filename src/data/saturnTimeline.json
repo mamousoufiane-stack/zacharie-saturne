@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "calibrated": false,
+  "note": "Les temps sont volontairement non renseignés. Le mode démo utilise une horloge fictive distincte.",
+  "events": [
+    {
+      "id": "saturn-01",
+      "phrase": "Zacharie Flashiflash, trois ans, regard de météore",
+      "start": null,
+      "end": null,
+      "type": "intro",
+      "action": "intro",
+      "params": {
+        "label": "Un nouveau voyage commence"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-02",
+      "phrase": "Un rire qui fend le vent, une foulée qui dévore",
+      "start": null,
+      "end": null,
+      "type": "meteor",
+      "action": "meteor",
+      "params": {
+        "label": "Saute par-dessus les météorites"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-03",
+      "phrase": "Il file entre les secondes, sans jamais perdre le nord",
+      "start": null,
+      "end": null,
+      "type": "meteor",
+      "action": "meteor",
+      "params": {
+        "label": "Attrape les cristaux des étoiles"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-04",
+      "phrase": "Mais dans la course des étoiles… il découvre un trésor",
+      "start": null,
+      "end": null,
+      "type": "gold",
+      "action": "gold",
+      "params": {
+        "label": "Suis la lumière"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-05",
+      "phrase": "Sur Saturne, chaque roche exige une force mesurée",
+      "start": null,
+      "end": null,
+      "type": "fragile",
+      "action": "fragile",
+      "params": {
+        "label": "Trouve la bonne vitesse"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-06",
+      "phrase": "Trop d’élan casse le monde",
+      "start": null,
+      "end": null,
+      "type": "fragile",
+      "action": "fragile",
+      "params": {
+        "label": "Doucement sur les roches fragiles"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-07",
+      "phrase": "Trop de frein fait reculer",
+      "start": null,
+      "end": null,
+      "type": "wind",
+      "action": "wind",
+      "params": {
+        "label": "Accélère face au vent cosmique"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-08",
+      "phrase": "Alors il règle son souffle, comme un maître du tempo",
+      "start": null,
+      "end": null,
+      "type": "tempo",
+      "action": "tempo",
+      "params": {
+        "label": "Garde ton équilibre"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-09",
+      "phrase": "Et la vitesse devient art, pas seulement un galop",
+      "start": null,
+      "end": null,
+      "type": "gold",
+      "action": "gold",
+      "params": {
+        "label": "Les anneaux s’éveillent"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-10",
+      "phrase": "Flashiflash ! Zacharie, dans la nuit il brille fort",
+      "start": null,
+      "end": null,
+      "type": "glow",
+      "action": "glow",
+      "params": {
+        "label": "À toi de briller !"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-11",
+      "phrase": "Il court, il vole, il trace, avec la grâce d’un accord",
+      "start": null,
+      "end": null,
+      "type": "flight",
+      "action": "flight",
+      "params": {
+        "label": "Déploie tes ailes de lumière"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-12",
+      "phrase": "Pas besoin de frapper, il avance avec contrôle",
+      "start": null,
+      "end": null,
+      "type": "control",
+      "action": "control",
+      "params": {
+        "label": "La maîtrise fait la différence"
+      },
+      "anticipation": 3
+    },
+    {
+      "id": "saturn-13",
+      "phrase": "Quand il maîtrise l’énergie… tout l’univers s’envole !",
+      "start": null,
+      "end": null,
+      "type": "final",
+      "action": "final",
+      "params": {
+        "label": "Vers de nouveaux horizons"
+      },
+      "anticipation": 3
+    }
+  ]
+}

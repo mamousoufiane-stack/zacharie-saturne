@@ -1,0 +1,7 @@
+node_modules/
+.npm-cache/
+dist/
+test-results/
+*.log
+*.pid
+.openai/
