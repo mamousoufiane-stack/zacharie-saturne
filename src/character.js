@@ -45,7 +45,7 @@ export function createHero() {
   if(previous&&previous!==action){previous.fadeOut(.06);action.fadeIn(.06);}
   active=name;
  }
- hero.setSkin=(skin='original')=>new GLTFLoader().loadAsync(skin==='helmet'?'./models/zacharie-helmet.glb':'./models/zacharie.glb').then(gltf=>{
+ hero.setSkin=(skin='original')=>new GLTFLoader().loadAsync(skin==='helmet'?'./models/zacharie-helmet.glb?v=gloves-fit-2':'./models/zacharie.glb').then(gltf=>{
   const missing=HERO_CLIPS.filter(name=>!gltf.animations.some(c=>c.name===name));
   if(missing.length)throw new Error('Animations manquantes : '+missing.join(', '));
   if(model){
