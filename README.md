@@ -2,6 +2,10 @@
 
 ## Jouer et compiler
 
+### Rocher qui s'effondre
+
+Les quatre horloges flottantes du décor ont été retirées. Chaque astéroïde intermédiaire descend dès l'impact. Attendre 0,22 seconde pour la réception, puis sauter avant 0,85 seconde : les appuis anticipés ne sont pas mémorisés. Le départ et l'arrivée restent stables. En cas de chute, « Réessayer » relance le parcours. `node scripts/check-collapse.mjs` vérifie dans Chrome la descente, la fenêtre de saut, la chute et le redémarrage. Cette mécanique remplace l'attente libre et le tampon d'appui décrits dans les notes de validation de la version précédente.
+
 Pour GitHub Pages, la version compilée est publiée dans `docs/`. Dans Settings → Pages, sélectionner « Deploy from a branch », branche `main`, dossier `/docs`, puis Save. L’adresse prévue est https://mamousoufiane-stack.github.io/zacharie-saturne/ ; elle ne fonctionne qu’après activation et déploiement de Pages.
 
 Les chemins des modèles, textures, scripts et styles sont relatifs, pour fonctionner aussi bien dans ce sous-dossier que sur le serveur local. Après une modification, exécuter `npm run build` et actualiser `docs/` à partir de `dist/` avant publication.

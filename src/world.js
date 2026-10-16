@@ -6,7 +6,7 @@ import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
 import {createHero} from './character';
 import {asteroidTemplates,buildAsteroid} from './asteroids';
-import {ISLAND_SPACING,TOTAL_ISLANDS} from './jumping';
+import {ISLAND_SPACING,TOTAL_ISLANDS,islandDrop} from './jumping';
 export const pathX=()=>0;
 export class World{
  constructor(canvas){this.scene=new T.Scene();this.scene.background=new T.Color('#100c24');this.camera=new T.PerspectiveCamera(50,innerWidth/innerHeight,.1,600);this.renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.setSize(innerWidth,innerHeight);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;this.renderer.toneMapping=T.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.15;
@@ -18,7 +18,7 @@ export class World{
  for(let i=0;i<=TOTAL_ISLANDS;i++){const root=new T.Group();root.position.set(0,0,-i*ISLAND_SPACING);const rock=buildAsteroid(templates[i%templates.length],i);root.add(rock);
  const crystal=new T.Mesh(new T.OctahedronGeometry(.28),new T.MeshStandardMaterial({color:'#a4eeff',emissive:'#1baacb',emissiveIntensity:.7,metalness:.35,roughness:.15}));crystal.position.set(0,1.1,0);root.add(crystal);this.scene.add(root);this.islands.push({root,rock,crystal,index:i});}
  for(let i=0;i<35;i++){const m=templates[i%templates.length].clone();m.scale.setScalar(.5+(i%6)*.2);m.rotation.set(i*.2,i*.71,.3);this.decor.add(m);this.assets.push({m,i})}this.assetLoaded=true;}
- update(state,time,type,playing){const d=state.distance;this.hero.root.position.set(0,state.y-this.feetOffset+.015,-d);this.hero.root.rotation.set(0,0,0);this.hero.root.visible=true;if(playing)this.hero.updateForState(state,this.dt||.016);for(const {root,crystal,index}of this.islands){root.visible=index>=state.island-2&&index<state.island+(this.quality==='low'?10:18);crystal.visible=index>state.island;crystal.rotation.y=time;crystal.position.y=1.1+Math.sin(time*2+index)*.12;}
+ update(state,time,type,playing){const d=state.distance;this.hero.root.position.set(0,state.y-this.feetOffset+.015,-d);this.hero.root.rotation.set(0,0,0);this.hero.root.visible=true;if(playing)this.hero.updateForState(state,this.dt||.016);for(const {root,crystal,index}of this.islands){root.position.y=islandDrop(state.impacts?.[index]==null?null:state.elapsed-state.impacts[index]);root.visible=index>=state.island-2&&index<state.island+(this.quality==='low'?10:18);crystal.visible=index>state.island;crystal.rotation.y=time;crystal.position.y=1.1+Math.sin(time*2+index)*.12;}
  for(const {m,i}of this.assets){const z=(i*17+Math.floor(d/400)*400);m.position.set((i%2?1:-1)*(13+i%7*5),-6+(i%8)*3,-(z<d-40?z+400:z));m.rotation.y+=playing?.0005:0}
  this.targetMarker.position.set(0,.28,-(state.island+1)*ISLAND_SPACING);this.targetMarker.visible=state.island<TOTAL_ISLANDS;this.targetMarker.scale.setScalar(1+Math.sin(time*3)*.08);this.sun.position.set(12,35,-d-15);this.sun.target.position.set(0,0,-d-10);this.camera.position.lerp(new T.Vector3(0,7.2,-d+13),1-Math.exp(-7*(this.dt||.016)));this.camera.lookAt(0,1,-d-15);this.bloom.strength=type==='final'?.32:.18;}
  render(){this.quality==='low'?this.renderer.render(this.scene,this.camera):this.composer.render()}
