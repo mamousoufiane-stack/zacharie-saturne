@@ -11,5 +11,6 @@ export function setupSkins(world){
  document.querySelector('#credits').addEventListener('click',()=>{
   const p=document.createElement('p');p.innerHTML='Casque : <a href="https://sketchfab.com/3d-models/space-helmet-4135c92041514754829013181fbc7ee6" target="_blank" rel="noopener">space helmet</a> par J4747, sous CC BY 4.0. Adaptations : ajustement à Zacharie, visière transparente et liaison au squelette.';
   document.querySelector('#modal-content').append(p);
+  const gloves=document.createElement('p');gloves.innerHTML='Gants : <a href="https://sketchfab.com/3d-models/space-gloves-b8c0735db3d6431583406819c204fe1a" target="_blank" rel="noopener">space gloves</a> par gohean33, sous <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Adaptations : proportions, symétrie, textures optimisées et liaison aux mains animées.';document.querySelector('#modal-content').append(gloves);
  });
 }

@@ -45,3 +45,8 @@ Base : `ryder-paw-patrol.zip` et coiffure `black-messy-hair-with-horns.zip`, arc
 This work is based on "space helmet" (https://sketchfab.com/3d-models/space-helmet-4135c92041514754829013181fbc7ee6) by J4747 (https://sketchfab.com/J4747), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 Archive fournie : `space_helmet.zip`. Modifications : adaptation des proportions au personnage, visière transparente, liaison rigide à l'os Head. Le modèle fourni est distinct du premier lien Ryan King Art.
 
+# Gants du skin spatial
+
+This work is based on "space gloves" (https://sketchfab.com/3d-models/space-gloves-b8c0735db3d6431583406819c204fe1a) by gohean33 (https://sketchfab.com/gohean33), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+Archive fournie : `space_gloves.zip`. Adaptations : création du gant droit par symétrie, proportions adaptées, liaison aux os Hand/Forearm, réduction de géométrie et textures redimensionnées à 1024 pixels.
+
