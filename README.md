@@ -2,6 +2,8 @@
 
 ## Jouer et compiler
 
+Deux tenues sont disponibles via le bouton « Tenue » dans le menu : originale et casque spatial. Le second modèle (`public/models/zacharie-helmet.glb`, environ 7 Mo) conserve les cinq animations et utilise une visière transparente. Le premier modèle est inchangé. Source Blender séparée : `../art/characters/zacharie_helmet/blender/zacharie_helmet.blend`. Contrôle du changement de tenue et du saut : `node scripts/check-skins.mjs`.
+
 ### Rocher qui s'effondre
 
 Les quatre horloges flottantes du décor ont été retirées. Chaque astéroïde intermédiaire descend dès l'impact. Attendre 0,22 seconde pour la réception, puis sauter avant 0,85 seconde : les appuis anticipés ne sont pas mémorisés. Le départ et l'arrivée restent stables. En cas de chute, « Réessayer » relance le parcours. `node scripts/check-collapse.mjs` vérifie dans Chrome la descente, la fenêtre de saut, la chute et le redémarrage. Cette mécanique remplace l'attente libre et le tampon d'appui décrits dans les notes de validation de la version précédente.

@@ -45,9 +45,14 @@ export function createHero() {
   if(previous&&previous!==action){previous.fadeOut(.06);action.fadeIn(.06);}
   active=name;
  }
- hero.ready=new GLTFLoader().loadAsync('./models/zacharie.glb').then(gltf=>{
+ hero.setSkin=(skin='original')=>new GLTFLoader().loadAsync(skin==='helmet'?'./models/zacharie-helmet.glb':'./models/zacharie.glb').then(gltf=>{
   const missing=HERO_CLIPS.filter(name=>!gltf.animations.some(c=>c.name===name));
   if(missing.length)throw new Error('Animations manquantes : '+missing.join(', '));
+  if(model){
+   root.remove(model);mixer.stopAllAction();mixer.uncacheRoot(model);
+   model.traverse(o=>{if(o.isMesh){o.geometry.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material])){for(const v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose();}}});
+  }
+  active='';action=null;for(const name of Object.keys(actions))delete actions[name];
   model=gltf.scene;model.name='Zacharie';model.rotation.y=Math.PI;
   model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;}});
   model.updateMatrixWorld(true);
@@ -55,7 +60,8 @@ export function createHero() {
   model.scale.setScalar(scale);model.position.y=-bounds.min.y*scale;
   root.remove(fallback.rig);root.add(model);hero.rig=model;mixer=new T.AnimationMixer(model);
   for(const clip of gltf.animations)actions[clip.name]=mixer.clipAction(clip);
-  hero.status='ready';play('Idle');mixer.update(0);root.updateMatrixWorld(true);hero.feetOffset=0;
- }).catch(error=>{hero.status='fallback';hero.error=error;console.warn('Personnage de secours utilisé',error);});
+  hero.status='ready';hero.skin=skin;play('Idle');mixer.update(0);root.updateMatrixWorld(true);hero.feetOffset=0;
+ });
+ hero.ready=hero.setSkin().catch(error=>{hero.status='fallback';hero.error=error;console.warn('Personnage de secours utilisé',error);});
  return hero;
 }

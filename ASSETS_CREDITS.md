@@ -40,3 +40,8 @@ Archive fournie par l’utilisateur : wandering_asteroids_of_andromeda.zip. Lice
 ## Personnage Blender intégré (version 4)
 
 Base : `ryder-paw-patrol.zip` et coiffure `black-messy-hair-with-horns.zip`, archives fournies par l’utilisateur. Aucun auteur ou fichier de licence n’était inclus dans ces deux archives ; aucune attribution ou licence supplémentaire n’est supposée. Adaptations locales : coiffure châtain, visage et sourire, tenue orange/noire et emblèmes, rig, animations et conversion GLB. Les archives d’origine restent conservées. Aucun service externe de génération ou téléversement utilisé pour ce personnage.
+# Second skin : casque spatial
+
+This work is based on "space helmet" (https://sketchfab.com/3d-models/space-helmet-4135c92041514754829013181fbc7ee6) by J4747 (https://sketchfab.com/J4747), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+Archive fournie : `space_helmet.zip`. Modifications : adaptation des proportions au personnage, visière transparente, liaison rigide à l'os Head. Le modèle fourni est distinct du premier lien Ryan King Art.
+
