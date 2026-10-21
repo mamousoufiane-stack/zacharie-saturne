@@ -5,6 +5,7 @@ import {JUMP_DURATION} from './jumping.js';
 
 export const HERO_CLIPS = ['Idle', 'JumpStart', 'JumpAir', 'Land', 'Victory'];
 export const HERO_MODEL_URL = './models/zacharie-hunyuan.glb?v=8fb68f88';
+export const HELMET_MODEL_URL = './models/zacharie-hunyuan-helmet.glb?v=80a784eb';
 export const TAKEOFF_DURATION = .14;
 export function jumpAnimation(jumpTime) {
  const time = T.MathUtils.clamp(jumpTime, 0, JUMP_DURATION);
@@ -46,7 +47,7 @@ export function createHero() {
   if(previous&&previous!==action){previous.fadeOut(.06);action.fadeIn(.06);}
   active=name;
  }
- hero.setSkin=(skin='original')=>new GLTFLoader().loadAsync(skin==='helmet'?'./models/zacharie-helmet.glb?v=gloves-fit-2':HERO_MODEL_URL).then(gltf=>{
+ hero.setSkin=(skin='original')=>new GLTFLoader().loadAsync(skin==='helmet'?HELMET_MODEL_URL:HERO_MODEL_URL).then(gltf=>{
   const missing=HERO_CLIPS.filter(name=>!gltf.animations.some(c=>c.name===name));
   if(missing.length)throw new Error('Animations manquantes : '+missing.join(', '));
   if(model){
@@ -57,7 +58,7 @@ export function createHero() {
   model=gltf.scene;model.name='Zacharie';model.rotation.y=Math.PI;
   model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;}});
   model.updateMatrixWorld(true);
-  const bounds=new T.Box3().setFromObject(model,true),scale=2.65/(bounds.max.y-bounds.min.y);
+  const bounds=new T.Box3().setFromObject(model,true),scale=2.65/3.4;
   model.scale.setScalar(scale);model.position.y=-bounds.min.y*scale;
   root.remove(fallback.rig);root.add(model);hero.rig=model;mixer=new T.AnimationMixer(model);
   for(const clip of gltf.animations)actions[clip.name]=mixer.clipAction(clip);

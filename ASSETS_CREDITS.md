@@ -55,3 +55,6 @@ Archive fournie : `space_gloves.zip`. Adaptations : création du gant droit par 
 ## Personnage principal Hunyuan3D (21 octobre 2026)
 
 `public/models/zacharie-hunyuan.glb` : génération locale Hunyuan3D 2.1 à partir de la planche Zacharie Flashiflash fournie par l’utilisateur. Une vue isolée a été préparée avec image_gen. Corrections Blender : nettoyage, réduction à 96 976 triangles, emblèmes en relief, squelette de 20 os et cinq animations adaptées du précédent exporteur Saturne. Textures PBR 2048 px incorporées. Ce personnage ne reprend pas la géométrie de la base Ryder ; celle-ci subsiste dans le modèle archivé et la tenue avec casque.
+
+
+Variante cosmonaute : `zacharie-hunyuan-helmet.glb`, même corps et même squelette que Zacharie Hunyuan, cinq animations. Casque J4747 (CC BY 4.0) ajusté, cheveux resserrés sous la coque, visière transparente. Sélection dans le menu avec « Tenue : cosmonaute ». Les anciens modèles sont archivés.
