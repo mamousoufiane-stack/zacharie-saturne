@@ -1,8 +1,8 @@
-# Zacharie Flashiflash — Saturne, version 4 : personnage Blender animé
+# Zacharie Flashiflash — Saturne : personnage Hunyuan3D animé
 
 ## Jouer et compiler
 
-Deux tenues sont disponibles via le bouton « Tenue » dans le menu : originale et casque spatial. Le second modèle (`public/models/zacharie-helmet.glb`, environ 7 Mo) conserve les cinq animations et utilise une visière transparente. Le premier modèle est inchangé. Source Blender séparée : `../art/characters/zacharie_helmet/blender/zacharie_helmet.blend`. Contrôle du changement de tenue et du saut : `node scripts/check-skins.mjs`.
+Le personnage principal utilise désormais `public/models/zacharie-hunyuan.glb`, généré localement avec Hunyuan3D 2.1 puis corrigé et animé dans Blender. Le bouton « Tenue » permet toujours de passer au modèle distinct avec casque spatial, puis de revenir au nouveau personnage. Source Blender : `../art/characters/zacharie_hunyuan/blender/zacharie_hunyuan_rig.blend`.
 
 ### Rocher qui s'effondre
 
@@ -24,9 +24,9 @@ Le fond `public/images/saturn-backdrop.png` est une adaptation de la planche fou
 
 Les îlots jouables et le décor utilisent les trois véritables modèles glTF Wandering Asteroids Of Andromeda fournis par l’utilisateur. La silhouette est conservée grâce à une échelle uniforme. Les dalles, couronnes et supports artificiels ont été supprimés. Un raycast sur chaque astéroïde détermine son point de contact ; le placement du personnage tient compte de la position réelle de ses pieds. Les matériaux sont teintés en violet, avec éclairage doré. Textures originales embarquées (environ 37 Mo ; premier chargement plus long). Attribution CC BY 4.0 dans le menu Crédits et ASSETS_CREDITS.md.
 
-Le personnage vient du fichier Blender Zacharie, adapté de la base Ryder et de la coiffure OBJ fournis. `public/models/zacharie.glb` contient le squelette, le skinning, les couleurs et la texture des iris intégrée. Il est normalisé à 2,65 unités et orienté vers le prochain astéroïde. Les clips Idle, JumpStart, JumpAir, Land et Victory sont pilotés par l’état du jeu ; le vol suit la trajectoire de 1,05 seconde, sans seconde translation dans l’animation. Les jambes utilisent une IK calculée puis enregistrée dans les clips pour conserver l’appui des pieds pendant les flexions.
+Le nouveau Zacharie est une interprétation 3D de la planche fournie : géométrie et textures PBR calculées avec Hunyuan3D, emblèmes poitrine/dos reconstruits dans Blender, maillage optimisé et squelette de 20 os. Le GLB embarque toutes ses textures. Il est normalisé à 2,65 unités et orienté vers le prochain astéroïde. Les clips Idle, JumpStart, JumpAir, Land et Victory suivent l’état du jeu et le saut de 1,05 seconde, sans mouvement global supplémentaire.
 
-Le GLB représente 68 929 triangles, 14 objets de maillage avant export, 20 os et environ 3,36 Mo. L’ancien personnage reste disponible dans `src/character-fallback.js` et prend le relais si le GLB ne charge pas ; un message le signale. Les sources se trouvent dans `../art/characters/zacharie/`, notamment `blender/zacharie_game_rig.blend` et `scripts/export_game.py`. Les fichiers artistiques précédents sont conservés.
+Le nouveau GLB contient 96 976 triangles, 7 maillages, 20 os et pèse 7 140 544 octets. L’ancien `zacharie.glb` est conservé comme archive. Le personnage de secours dans `src/character-fallback.js` prend le relais si le chargement échoue. Les doigts ne sont pas animés individuellement et les textures conservent quelques approximations de génération.
 
 ## Musique
 

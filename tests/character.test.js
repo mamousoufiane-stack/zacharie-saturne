@@ -2,15 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as T from 'three';
 import {loadGeometry,readGLB} from './glb-helper.js';
-import {jumpAnimation,HERO_CLIPS} from '../src/character.js';
+import {jumpAnimation,HERO_CLIPS,HERO_MODEL_URL} from '../src/character.js';
 import {JUMP_DURATION} from '../src/jumping.js';
-const file='public/models/zacharie.glb';
-test('hero contains skin, five named animations, colors and an embedded iris texture',()=>{
+const file='public/'+HERO_MODEL_URL.replace(/^\.\//,'').split('?')[0];
+test('default Hunyuan hero contains skin, five named animations and embedded PBR textures',()=>{
  const {json}=readGLB(file);
  assert.deepEqual(json.animations.map(a=>a.name).sort(),[...HERO_CLIPS].sort());
  assert.equal(json.skins.length,1);
  assert.ok(json.images.every(i=>Number.isInteger(i.bufferView)&&!i.uri));
- assert.ok(json.meshes.some(m=>m.primitives.some(p=>p.attributes.COLOR_0!==undefined)));
+ assert.ok(json.materials.some(m=>m.pbrMetallicRoughness?.baseColorTexture));
+ assert.ok(json.materials.some(m=>m.pbrMetallicRoughness?.metallicRoughnessTexture));
  for(const m of json.meshes)for(const p of m.primitives){assert.ok(p.attributes.JOINTS_0!==undefined);assert.ok(p.attributes.WEIGHTS_0!==undefined);}
 });
 test('jump animation follows the 1.05 second gameplay trajectory exactly',()=>{
@@ -31,7 +32,7 @@ test('all exported poses stay finite, retain scale and have no root motion',asyn
    const root=scene.getObjectByName('Root');assert.ok(root.position.length()<1e-6,clip.name+' root translation');
    if(clip.name!=='JumpAir')for(const side of ['L','R']){
     const foot=scene.getObjectByName('Foot'+side).getWorldPosition(new T.Vector3());
-    assert.ok(Math.abs(foot.y-.24)<.005,clip.name+' planted foot height');
+    assert.ok(Math.abs(foot.y-.23)<.005,clip.name+' planted foot height');
    }
    if(clip.name==='Victory')for(const side of ['L','R']){
     const hand=scene.getObjectByName('Hand'+side).getWorldPosition(new T.Vector3());

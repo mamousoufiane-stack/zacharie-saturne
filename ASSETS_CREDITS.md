@@ -50,3 +50,8 @@ Archive fournie : `space_helmet.zip`. Modifications : adaptation des proportions
 This work is based on "space gloves" (https://sketchfab.com/3d-models/space-gloves-b8c0735db3d6431583406819c204fe1a) by gohean33 (https://sketchfab.com/gohean33), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 Archive fournie : `space_gloves.zip`. Adaptations : création du gant droit par symétrie, proportions adaptées, liaison aux os Hand/Forearm, réduction de géométrie et textures redimensionnées à 1024 pixels.
 
+
+
+## Personnage principal Hunyuan3D (21 octobre 2026)
+
+`public/models/zacharie-hunyuan.glb` : génération locale Hunyuan3D 2.1 à partir de la planche Zacharie Flashiflash fournie par l’utilisateur. Une vue isolée a été préparée avec image_gen. Corrections Blender : nettoyage, réduction à 96 976 triangles, emblèmes en relief, squelette de 20 os et cinq animations adaptées du précédent exporteur Saturne. Textures PBR 2048 px incorporées. Ce personnage ne reprend pas la géométrie de la base Ryder ; celle-ci subsiste dans le modèle archivé et la tenue avec casque.
