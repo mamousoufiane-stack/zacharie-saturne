@@ -77,3 +77,9 @@ et licence ci-dessus). Les noms basalte/ambre/glace restent des identifiants de
 fichiers ; les matériaux colorés initiaux ont été remplacés. L'arche d'arrivée
 `finish-gate.glb` et ses drapeaux sont modélisés pour ce projet dans Blender.
 L'aura dorée et ses particules sont un effet original du jeu.
+
+Comètes : asset original `public/models/comet.glb`, noyau rocheux et traînées
+courbes modélisés dans Blender (`../art/create_comet.py`, `../art/comete.blend`),
+avec halo et poussières lumineuses animés dans le jeu. Remplace l'ancien cône
+blanc traversant le décor. Compteur de vitesse : cadran SVG original adapté de
+la référence visuelle fournie par l'utilisateur ; valeur dynamique en km/h.

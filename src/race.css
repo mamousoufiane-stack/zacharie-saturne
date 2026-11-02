@@ -8,3 +8,11 @@
 @media(max-height:650px) and (min-width:601px){#menu{top:13%;width:530px}#menu h1{font-size:40px;margin:10px 0}.v2-badge,.intro{display:none}.course-selector{margin-top:10px}.course-selector button{padding:10px 14px}.tagline{margin:7px 0}.race-playing #race-panel{bottom:20px}.race-playing .energy-panel{display:none}}
 .menu-actions{flex-wrap:wrap}.menu-actions #skin{font-size:10px;min-width:130px}@media(max-width:600px){.menu-actions #skin{padding:9px 12px}.course-selector button{min-width:0}.menu-actions{gap:7px}}
 .race-playing .energy-panel progress::-webkit-progress-value{background:linear-gradient(90deg,#f0a52c,#fff0a0)}.race-playing .energy-panel progress::-moz-progress-bar{background:#ffd069}
+.race-playing #race-panel{align-items:center;gap:10px;left:22px;bottom:115px;padding:0;border:0;background:none;backdrop-filter:none}
+#speedometer{width:200px;filter:drop-shadow(0 6px 12px #0009)}#speedometer svg{display:block;width:100%;overflow:visible}
+#speedometer #race-speed{fill:#fff;font:italic 900 47px system-ui,sans-serif;letter-spacing:-2px;font-variant-numeric:tabular-nums;paint-order:stroke;stroke:#041628;stroke-width:1px}
+#speedometer .speed-unit{fill:#e9f7ff;font:italic 700 20px system-ui,sans-serif}
+#speed-marker{transition:transform .12s linear}
+#race-panel .rival-readout{padding:12px 14px;border:1px solid #78d5ff38;border-radius:13px;background:#102235cc;min-width:90px}
+@media(max-width:600px){.race-playing #race-panel{left:14px;right:14px;bottom:137px;justify-content:space-between;padding:0}#speedometer{width:145px}#race-panel .rival-readout{padding:10px;min-width:80px}}
+@media(max-height:650px) and (min-width:601px){.race-playing #race-panel{bottom:15px}#speedometer{width:160px}}

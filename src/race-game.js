@@ -1,5 +1,6 @@
 ﻿import {RaceRunner,WolfRunner,RACE_LENGTH,RACE_SEGMENTS} from './racing';
 import {RaceWorld} from './race-world';
+import {speedometerMarkup,updateSpeedometer} from './speedometer';
 export class RaceGame{
  constructor(world,ui){
   this.state=new RaceRunner();this.rival=new WolfRunner();this.view=new RaceWorld(world);this.ready=this.view.ready;this.ui=ui;
@@ -7,7 +8,7 @@ export class RaceGame{
   selector.innerHTML='<button id="course-classic" class="selected" aria-pressed="true"><small>01 · ORIGINAL</small>Le grand saut<span>36 astéroïdes · Espace</span></button><button id="course-race" aria-pressed="false"><small>02 · NOUVEAU</small>La course du loup<span>1,4 km · course + 3 sauts</span></button>';
   document.querySelector('.menu-actions').before(selector);
   document.querySelector('.demo-note').innerHTML='VERSION 2 · DEUX PARCOURS';
-  const panel=document.createElement('div');panel.id='race-panel';panel.innerHTML='<div><small>VITESSE</small><strong id="race-speed">0</strong><span>km/h</span></div><div><small>LE LOUP</small><b id="race-lead">À tes côtés</b><span id="race-time">0:00</span></div>';
+  const panel=document.createElement('div');panel.id='race-panel';panel.innerHTML=speedometerMarkup()+'<div class="rival-readout"><small>LE LOUP</small><b id="race-lead">À tes côtés</b><span id="race-time">0:00</span></div>';
   document.querySelector('#hud').append(panel);
   const run=document.createElement('button');run.id='run';run.setAttribute('aria-label','Tapoter pour courir');run.innerHTML='X <small>COURIR</small>';document.querySelector('.jump-touch').append(run);
   document.querySelector('#menu h1').insertAdjacentHTML('beforebegin','<div class="v2-badge">V2 / LA COURSE COSMIQUE</div>');
@@ -34,7 +35,7 @@ export class RaceGame{
   $('#progress').value=p.distance/RACE_LENGTH*100;$('#progress-text').textContent=`${Math.min(RACE_SEGMENTS.length,p.island+1)} / ${RACE_SEGMENTS.length}`;
   $('#distance').textContent=`${Math.floor(p.distance)} / ${RACE_LENGTH} m`;
   $('#energy').value=p.energy;$('#sync-label').textContent=`${p.cadence.toFixed(1)} APPUIS / SECONDE`;
-  $('.energy-panel>span').textContent='ÉNERGIE DE VITESSE';$('#race-speed').textContent=Math.round(p.speed*3.6);
+  $('.energy-panel>span').textContent='ÉNERGIE DE VITESSE';updateSpeedometer(p.speed);
   $('#race-lead').textContent=r.finished?'Le loup est arrivé':Math.abs(lead)<3?'À tes côtés':lead>0?`${Math.round(lead)} m devant`:`${Math.round(-lead)} m derrière`;
   $('#race-time').textContent=`${Math.floor(p.elapsed/60)}:${String(Math.floor(p.elapsed%60)).padStart(2,'0')}`;
   const small=RACE_SEGMENTS[p.island]?.kind==='jump';
