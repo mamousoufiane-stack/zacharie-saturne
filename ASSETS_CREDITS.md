@@ -1,5 +1,15 @@
 # Provenance des ressources
 
+## Montségur
+
+Les sept assets de `public/models/monsegur/` proviennent de nouvelles planches en
+quatre vues créées avec `image_gen` à partir de l'affiche fournie par l'utilisateur.
+Reconstruction locale : Hunyuan3D-2mv ; textures : Hunyuan3D-Paint 2.1 ; adaptation
+au jeu et squelette du bouquetin : Blender. Le panorama
+`public/images/monsegur-backdrop.png` est une génération 2D distincte.
+Prompts, références et manifeste : `../Monde Montségur/`. Sources 3D :
+`../art/monsegur/`. Zacharie, l'ATH et le portique d'arrivée sont réutilisés du jeu.
+
 ## Kenney — Space Kit
 
 - Auteur : Kenney (https://kenney.nl)

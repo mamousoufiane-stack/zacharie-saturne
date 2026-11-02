@@ -1,3 +1,21 @@
+# Zacharie — Saturne et Montségur
+
+Le menu propose maintenant **Montségur — Le défi du bouquetin**, en plus des deux
+parcours de Saturne. Ouvrir `../Jouer.cmd`, choisir Montségur, puis lancer la course.
+L'ATH, X pour accélérer, Espace pour sauter, la pause et les boutons tactiles sont
+partagés avec la course du loup. Zacharie et ses tenues sont conservés.
+
+Sept nouveaux modèles sont générés en quatre vues avec `image_gen`, reconstruits
+avec Hunyuan3D-2mv et texturés avec Hunyuan3D-Paint 2.1 : bouquetin animé, route
+pavée, pont de bois, falaise herbeuse, arbre, bannière occitane et panneau.
+Le fond panoramique représente le château et les montagnes. Les sources et prompts
+sont dans `../Monde Montségur/`, les calculs et scènes Blender dans `../art/monsegur/`.
+Le portique d'arrivée et les règles de course sont réutilisés.
+
+Module de décor : `src/monsegur-world.js`. Vérification : `npm test`, `npm run build`,
+puis `node scripts/check-monsegur.mjs` avec le jeu servi au port 5174 (`GAME_URL`
+permet de choisir un autre serveur).
+
 # Jeux Saturne V2 — La course du loup
 
 Lancer `../Jouer V2.cmd` ou `../Jouer.cmd`. La version compilée est dans `dist/`.

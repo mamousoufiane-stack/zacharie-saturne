@@ -16,3 +16,8 @@
 #race-panel .rival-readout{padding:12px 14px;border:1px solid #78d5ff38;border-radius:13px;background:#102235cc;min-width:90px}
 @media(max-width:600px){.race-playing #race-panel{left:14px;right:14px;bottom:137px;justify-content:space-between;padding:0}#speedometer{width:145px}#race-panel .rival-readout{padding:10px;min-width:80px}}
 @media(max-height:650px) and (min-width:601px){.race-playing #race-panel{bottom:15px}#speedometer{width:160px}}
+
+.course-selector{flex-wrap:wrap}.course-selector button{min-width:145px}@media(max-width:600px){.course-selector button{min-width:0;flex-basis:28%;padding:10px 7px;font-size:10px}.course-selector small{font-size:6px}}
+.monsegur-selected #menu h1{font-size:clamp(34px,4.5vw,64px)}
+.monsegur-selected.playing .progress-wrap,.monsegur-selected.playing .mission{background:#172d32cc;border-radius:12px;padding:10px 14px;box-sizing:border-box;text-shadow:0 1px 3px #0009}
+@media(max-width:600px){.monsegur-selected.race-playing .mission{top:176px}}
