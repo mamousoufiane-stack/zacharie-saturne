@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
-const root=fileURLToPath(new URL('../dist/',import.meta.url)),port=5173;
+const root=fileURLToPath(new URL('../dist/',import.meta.url)),port=Number(process.env.PORT||5173);
 const open=()=>spawn('cmd.exe',['/c','start','','http://localhost:'+port],{windowsHide:true,stdio:'ignore'}).unref();
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json','.gltf':'model/gltf+json','.glb':'model/gltf-binary','.bin':'application/octet-stream','.png':'image/png','.jpeg':'image/jpeg','.jpg':'image/jpeg','.mp3':'audio/mpeg'};
 const server=http.createServer((req,res)=>{

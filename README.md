@@ -1,3 +1,50 @@
+# Jeux Saturne V2 — La course du loup
+
+Lancer `../Jouer V2.cmd` ou `../Jouer.cmd`. La version compilée est dans `dist/`.
+Le menu propose le parcours original « Le grand saut » et le nouveau parcours
+« La course du loup » : 1 394 mètres, neuf plateformes de 112 à 152 mètres,
+deux séquences de trois sauts sur de petits rochers de la V1 et un loup animé
+dans la voie voisine. Chaque séquence relie deux grandes plateformes par deux
+petits astéroïdes, soit trois sauts au total.
+
+Dans la course, tapoter **X** accélère selon la cadence des appuis ; maintenir
+la touche ne déclenche pas de répétition automatique. **Espace** fait sauter.
+Avec au moins 8 m/s près du bord, le saut est guidé vers la plateforme
+suivante. Plus loin du bord, il s'agit d'un saut avec élan sur le même rocher.
+Sur un petit astéroïde, le personnage attend le prochain appui sur Espace :
+le saut suivant reste possible même si sa vitesse a diminué. Tapoter X permet
+de conserver son énergie pour la reprise de la course.
+L'aura dorée, ses flammes et ses particules suivent la vitesse, avec le champ de vision. Sans appuis,
+le héros ralentit. Les boutons tactiles X et ↑ proposent les mêmes commandes.
+Échap met les deux coureurs en pause. Une chute ramène au dernier rocher et fait
+perdre du temps. L'arrivée compare le temps du héros à celui du loup.
+Le parcours original conserve son effondrement et ses 36 sauts ; les deux tenues
+restent disponibles.
+
+Les trois astéroïdes sont issus de quatre vues par modèle générées par `image_gen`,
+reconstruites localement avec **Hunyuan3D-2mv**, puis texturées avec
+**Hunyuan3D-Paint 2.1**. Les surfaces supérieures ont été aplanies dans Blender et
+les dimensions adaptées à la course. Sources, prompts, journaux et scènes Blender :
+`../art/asteroids_v2/`. Le loup réutilise le GLB au pelage gris corrigé, avec un
+squelette et trois clips. Zacharie reçoit un cycle de course sur son squelette existant.
+
+Les trois rochers de course utilisent désormais le matériau rocheux du parcours
+original. Leurs enveloppes sont fermées dans Blender et leur sommet présente
+un léger relief géométrique, suivi par les deux coureurs. Les surfaces de contact
+et les pentes sont contrôlées sur les deux voies. Les marques de saut au sol ont été retirées.
+L'arrivée utilise l'asset `public/models/race/finish-gate.glb`, une arche avec
+drapeaux à damier. Sources des corrections : `../art/asteroids_v2/refine_v2.py`
+et `../art/asteroids_v2/finish-gate.blend`. L'aura est animée dans `src/power-aura.js`.
+
+Modules V2 : `racing.js` (course et rival), `race-world.js` (rochers, loup, aura),
+`race-game.js` (interface), `race.css`. Contrôles : `npm test`, `npm run build`,
+`node scripts/check-v2.mjs` avec un serveur local au port 5174 (ou `GAME_URL`).
+Les tests vérifient aussi les contacts sur les deux voies et le squelette du loup.
+
+## Notes de la version précédente
+
+Les notes ci-dessous décrivent le parcours original et son historique.
+
 # Zacharie Flashiflash — Saturne : personnage Hunyuan3D animé
 
 ## Jouer et compiler

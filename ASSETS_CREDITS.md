@@ -58,3 +58,22 @@ Archive fournie : `space_gloves.zip`. Adaptations : création du gant droit par 
 
 
 Variante cosmonaute : `zacharie-hunyuan-helmet.glb`, même corps et même squelette que Zacharie Hunyuan, cinq animations. Casque J4747 (CC BY 4.0) ajusté, cheveux resserrés sous la coque, visière transparente. Sélection dans le menu avec « Tenue : cosmonaute ». Les anciens modèles sont archivés.
+
+
+## Ajouts V2 — course du loup
+
+Trois astéroïdes originaux (basalte, ambre, glace) : références multivues créées
+avec l'outil image_gen intégré ; géométrie Hunyuan3D-2mv, textures Hunyuan3D-Paint
+2.1, adaptation des surfaces de course dans Blender. Prompts et sources conservés
+dans `../art/asteroids_v2`. Modèles officiels :
+https://huggingface.co/tencent/Hunyuan3D-2mv et https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1.
+Loup : quatre références fournies par l'utilisateur, géométrie Hunyuan3D-2mv,
+texture grise corrigée, squelette et animation de course préparés pour cette V2.
+Les attributions des actifs du parcours original restent inchangées.
+
+Corrections de la course : enveloppes des trois rochers fermées dans Blender,
+matériau commun repris de l'astéroïde Andromeda du parcours original (attribution
+et licence ci-dessus). Les noms basalte/ambre/glace restent des identifiants de
+fichiers ; les matériaux colorés initiaux ont été remplacés. L'arche d'arrivée
+`finish-gate.glb` et ses drapeaux sont modélisés pour ce projet dans Blender.
+L'aura dorée et ses particules sont un effet original du jeu.
