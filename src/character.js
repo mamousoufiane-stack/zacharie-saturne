@@ -14,6 +14,8 @@ export function jumpAnimation(jumpTime) {
 
 export function createHero() {
  const fallback=createFallbackHero(),root=fallback.root;
+ // Keep the emergency model hidden while the actual character is loading.
+ fallback.rig.visible=false;
  let model,mixer,active='',action,landTime=0,wasAirborne=false;
  const actions={};
  const hero={root,rig:fallback.rig,status:'loading',error:null,feetOffset:0,
@@ -77,6 +79,6 @@ export function createHero() {
   actions.Run=mixer.clipAction(new T.AnimationClip('Run',.8,tracks));
   hero.status='ready';hero.skin=skin;play('Idle');mixer.update(0);root.updateMatrixWorld(true);hero.feetOffset=0;
  });
- hero.ready=hero.setSkin().catch(error=>{hero.status='fallback';hero.error=error;console.warn('Personnage de secours utilisé',error);});
+ hero.ready=hero.setSkin().catch(error=>{fallback.rig.visible=true;hero.status='fallback';hero.error=error;console.warn('Personnage de secours utilisé',error);});
  return hero;
 }
